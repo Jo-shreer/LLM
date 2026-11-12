@@ -1,6 +1,7 @@
 # LLM
 LLM APIs
 
+```
 ### Project structure
 bedrock-chat-backend/
 ├── app/
@@ -21,3 +22,4 @@ bedrock-chat-backend/
 ├── .env.example
 ├── .gitignore
 └── README.md
+```

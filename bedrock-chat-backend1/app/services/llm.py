@@ -13,11 +13,7 @@ class LLMService:
             max_tokens=1500,
         )
 
-    async def generate_response(
-        self,
-        question: str,
-        context: str = "",
-    ) -> str:
+    async def generate_response(self, question: str, context: str = "",) -> str:
 
         system_prompt = """
         You are a helpful AI assistant.
@@ -34,11 +30,13 @@ class LLMService:
         """
 
         user_prompt = f"""
+        
         Retrieved context:
         {context if context else "No additional context provided."}
 
         User question:
         {question}
+        
         """
 
         response = await self.llm.ainvoke(

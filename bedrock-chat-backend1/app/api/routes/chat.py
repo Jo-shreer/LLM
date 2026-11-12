@@ -1,33 +1,58 @@
 
-from fastapi import APIRouter, HTTPException
+from typing import Any
 
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
-router = APIRouter(prefix="/chat", tags=["Chat"])
+
+router = APIRouter(
+    prefix="/chat",
+    tags=["Chat"],
+)
 
 
+# Request schema
 class ChatRequest(BaseModel):
-    question: str = Field(..., min_length=1, max_length=10000)
+    question: str = Field(
+        ...,
+        min_length=1,
+        max_length=10000,
+        description="User's chat question",
+    )
     conversation_id: str | None = None
 
 
+# Response schema
 class ChatResponse(BaseModel):
-    answer: str
-    conversation_id: str | None = None
+    status: str
+    message: str
+    data: dict[str, Any] | None = None
 
 
-@router.post("", response_model=ChatResponse)
+# Chat endpoint
+@router.post(
+    "",
+    response_model=ChatResponse,
+    status_code=status.HTTP_200_OK,
+)
 async def chat(request: ChatRequest):
 
     try:
-        # Service integration will be added next.
+        # TODO: Connect Bedrock Knowledge Base and LLM service.
+
+        answer = "Chat route is working. LLM integration is pending."
+
         return ChatResponse(
-            answer="Chat route is working. LLM integration is pending.",
-            conversation_id=request.conversation_id,
+            status="success",
+            message="Chat response generated successfully",
+            data={
+                "answer": answer,
+                "conversation_id": request.conversation_id,
+            },
         )
 
     except Exception as exc:
         raise HTTPException(
-            status_code=500,
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An internal server error occurred.",
         ) from exc

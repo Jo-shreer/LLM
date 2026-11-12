@@ -36,7 +36,6 @@ class ChatResponse(BaseModel):
     status_code=status.HTTP_200_OK,
 )
 async def chat(request: ChatRequest):
-
     try:
         # TODO: Connect Bedrock Knowledge Base and LLM service.
 

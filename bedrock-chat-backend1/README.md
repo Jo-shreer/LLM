@@ -2,24 +2,21 @@
 LLM APIs
 
 ```
-### Project structure
-bedrock-chat-backend/
-├── app/
-│   ├── main.py
-│   ├── api/
-│   │   └── routes/
-│   │       └── chat.py
-│   ├── core/
-│   │   ├── config.py
-│   │   └── security.py
-│   ├── schemas/
-│   │   └── chat.py
-│   └── services/
-│       ├── bedrock_retriever.py
-│       └── llm.py
-├── requirements.txt
-├── Dockerfile
-├── .env.example
-├── .gitignore
-└── README.md
+app/
+├── api/
+│   └── routes/
+│       └── chat.py
+├── middleware/
+│   ├── __init__.py
+│   ├── request_logging.py
+│   └── request_id.py
+├── core/
+│   ├── config.py
+│   └── exceptions.py
+├── schemas/
+│   └── chat.py
+├── services/
+│   ├── llm.py
+│   └── bedrock_retriever.py
+└── main.py
 ```
